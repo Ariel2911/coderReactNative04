@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ScrollView,
   View,
@@ -8,6 +8,8 @@ import {
   Button,
 } from 'react-native';
 import { colors } from '../utils/colors';
+import { useDispatch } from 'react-redux';
+import { addPlace } from '../store/place.slice';
 
 const styles = StyleSheet.create({
   container: {
@@ -30,15 +32,24 @@ const styles = StyleSheet.create({
 });
 
 const NewPlaceScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const [ title, setTitle ] = useState('');
+
+  const onHandleTitleChange = (text) => setTitle(text);
+  const onHandleSubmit = () => {
+    dispatch(addPlace(title));
+    navigation.navigate('Place'); 
+  }
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.title} >Titulo</Text>
-        <TextInput style={styles.input} placeholder="Nueva Ubicación" />
+        <TextInput style={styles.input} placeholder="Nueva Ubicación" onChange={onHandleTitleChange} value={title} />
         <Button 
           title='Grabar Dirección'
           color={colors.primary}
-          onPress={() => null}
+          onPress={onHandleSubmit}
         />
       </View>
     </ScrollView>
