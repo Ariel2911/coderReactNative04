@@ -22,7 +22,7 @@ const PlaceListScreen = ({ navigation }) => {
   };
   
   const renderItem = ({ item }) => (
-    <PlaceItems {...item} onSelect={onSelectPlace} />
+    <PlaceItems {...item} address={'123 calle, Ciudad, Distrito'} onSelect={onSelectPlace} />
   );
 
   const listEmptyComponent = () => (

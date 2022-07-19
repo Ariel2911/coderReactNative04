@@ -11,6 +11,7 @@ import { colors } from '../utils/colors';
 import { useDispatch } from 'react-redux';
 import { savePlace } from '../store/place.slice';
 import ImageSlector from '../components/ImageSelector';
+import LocationSlector from '../components/LocationSelector';
 
 const styles = StyleSheet.create({
   container: {
@@ -36,6 +37,7 @@ const NewPlaceScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const [ title, setTitle ] = useState('');
   const [ image, setImage ] = useState('');
+  const [ location, setLocation ] = useState({});
 
   const onHandleTitleChange = (text) => {
     setTitle(text)
@@ -48,12 +50,15 @@ const NewPlaceScreen = ({ navigation }) => {
 
   const onHandleImageSelected = (imageUrl) => setImage(imageUrl);
 
+  const onHandleLocationSelected = (location) => setLocation(location);
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.title} >Titulo</Text>
         <TextInput style={styles.input} placeholder="Nueva Ubicación" onChangeText={onHandleTitleChange} value={title} />
         <ImageSlector onImage={onHandleImageSelected} />
+        <LocationSlector onLocation={onHandleLocationSelected} />
         <Button 
           title='Grabar Dirección'
           color={colors.primary}
